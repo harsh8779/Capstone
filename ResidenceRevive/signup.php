@@ -2,6 +2,9 @@
 <?php session_start(); ?>
 
 <?php
+
+echo print_r($_SESSION);
+
 $first_name = $last_name = $email = $phone = $password = "";
 $first_name_err = $last_name_err = $email_err = $phone_err = $password_err = $email_phone_err = "";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -89,7 +92,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // If the insertion done by the user was successful, then store a success message in the session
         if ($stmt->execute()) {
-            $_SESSION['db_message'] = "New record created successfully";
+
+            // store user data on signup
+            $_SESSION['email'] = $email;
+            $_SESSION['first_name'] = $first_name;
+            $_SESSION['last_name'] = $last_name;
+
+            $_SESSION['signup_message'] = "New record created successfully";
         } else {
             $_SESSION['db_message'] = "Error: " . $stmt->error;
         }
@@ -178,6 +187,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div>
                 <!-- <button type="button" class="google-signup">Sign up with Google</button> -->
                 <p>Already have an account? <a href="login.php">Login</a></p>
+                 <?php if(isset($_SESSION['signup_message'])): ?>
+                <div class="alert alert-success">
+                    <?php echo $_SESSION['signup_message']; unset($_SESSION['signup_message']); ?>
+                </div>
+                <?php endif; ?>
             </div>
             <!-- The link to the login page for the users who already have an account registered with us -->
             <div class="form-group">
