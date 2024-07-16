@@ -249,8 +249,38 @@ $conn->close();
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="3" class="cart-total">Cart Total:
-                        $<?php echo $cart_total; ?></td>
+                    <td colspan="3" class="cart-total" style="font-size: 1.2rem;">
+
+
+
+                        <?php
+
+                    $tax_rate = 0.13;
+
+            $tax_amount = $cart_total * $tax_rate;
+            $total_with_tax = $cart_total + $tax_amount;
+
+
+            ?>
+
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Cart Total:</td>
+                                <td>$<?php echo number_format($cart_total, 2); ?>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Tax Amount (13% of Cart Total):</td>
+                                <td>$<?php echo number_format($tax_amount, 2); ?>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Total with Tax:</td>
+                                <td>$<?php echo number_format($total_with_tax, 2); ?>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
                     <td class="text-end">
                         <form action="billing.php" method="POST" class="cart-buttons">
                             <button type="submit">Proceed to Payment</button>
