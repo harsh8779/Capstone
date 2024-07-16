@@ -72,7 +72,7 @@ if (isset($_SESSION['email']) && isset($_SESSION['first_name'])) {
                             
                         <?php else: ?>
                             <li class="nav-item">
-                                <a class="nav-link" href="logout.php">- Logout
+                                <a class="nav-link" href="logout.php">Logout
                                 </a>
                             </li>
                         <?php endif ; ?>
